@@ -3895,7 +3895,7 @@ const updateBusTiming = () => {
      }
     
     //Update fetch URL query parameter based on search input
-    // busArrivalUrl += input.value
+    busArrivalUrl += input.value
     // let dataBusArrival = null
 
     //Get Temporary access to proxy to avoid cors error when fetching here:
