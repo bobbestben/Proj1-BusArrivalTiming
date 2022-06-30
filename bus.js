@@ -2,7 +2,7 @@
 //This data neds to be continulously fetch when user searches for timing
 //Below is sample data for testing purpose
 //Bus arrival data for bus stop No. 01013
-const dataBusArrival_2 = {
+const dataBusArrival = {
     "odata.metadata": "http://datamall2.mytransport.sg/ltaodataservice/$metadata#BusArrivalv2/@Element",
     "BusStopCode": "01013",
     "Services": [
@@ -3843,7 +3843,7 @@ tabs.forEach(tab => {
 
 //API Calls
 console.log('HELLO IS MY SCRIPT WORKING')
-console.log(dataBusArrival_2)
+console.log(dataBusArrival)
 console.log(dataBusStop)
 
 //Variables for updating bus-stop-section
@@ -3886,7 +3886,7 @@ const updateBusTiming = () => {
     busStopInfo_1.innerText = "Bus Stop Name"
     busStopInfo_2.innerText = "Bus Stop No. / Street Name"
 
-    let busArrivalUrl = "http://datamall2.mytransport.sg/"+
+    let busArrivalUrl = "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/"+
         "ltaodataservice/BusArrivalv2?BusStopCode="
 
     storeSearchValue = input.value
@@ -3895,28 +3895,28 @@ const updateBusTiming = () => {
      }
     
     //Update fetch URL query parameter based on search input
-    busArrivalUrl += input.value
-    let dataBusArrival = null
+    // busArrivalUrl += input.value
+    // let dataBusArrival = null
+
     //Get Temporary access to proxy to avoid cors error when fetching here:
     //https://cors-anywhere.herokuapp.com/corsdemo
-
     //Fetch Bus Arrival Data
-    fetch(busArrivalUrl, {
-        method: 'GET',
-        headers: {
-          'AccountKey': 'c5SCu1KNQ4OsnpfU+wxoyg=='
-        }
-    })
-        .then(response => {
-            return response.json()
-        })
-        .then(jsonData => {
-            dataBusArrival = jsonData
-            console.log(dataBusArrival)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    // fetch(busArrivalUrl, {
+    //     method: 'GET',
+    //     headers: {
+    //       'AccountKey': 'c5SCu1KNQ4OsnpfU+wxoyg=='
+    //     }
+    // })
+    //     .then(response => {
+    //         return response.json()
+    //     })
+    //     .then(jsonData => {
+    //         dataBusArrival = jsonData
+    //         console.log(dataBusArrival)
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
 
     //Update Bus Stop Information - if input.value matches a bus stop
     const numberBusStops = dataBusStop['value'].length
