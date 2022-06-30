@@ -1,0 +1,83 @@
+.container {
+    background-color: #ececec;
+}
+
+.nav-header {
+    background-color: lightslategray;
+    cursor: pointer;
+}
+
+.nav-header>* {
+    padding: 4px 10px;
+}
+.nav-header>*:hover {
+    /* background-color: #5d6d7c;; */
+    background-color: #8896a5;
+}
+
+.nav-header .active {
+    /* background-color: #5d6d7c; */
+    /* background-color: #424d58; */
+    background-color: #576574;
+}
+
+.search-bar {
+    background-color: gainsboro;
+}
+
+.info-section {
+    background-color: darkgray;
+    border-bottom: 2px solid;
+
+}
+
+.bus-stop-info p {
+    font-size: 0.8em;
+}
+
+
+.bus-stop-section {
+    background-color: lightgray;
+    padding: 12px;
+    height: calc(100vh - 240px);
+}
+
+.bus-arrival-section:nth-of-type(2n) {
+    background-color: darkgrey;
+}
+
+.bus-arrival-section:nth-of-type(2n+1) {
+    background-color: silver;
+}
+
+.color-palette-test {
+    padding: 0px 12px;
+}
+
+.color-palette-test>*{
+    height: 15px;
+}
+
+.one {
+    background-color: #2E1114;
+}
+.two {
+    background-color: #501B1D;
+}
+.three {
+    background-color: #64485C;
+}
+.four {
+    background-color: #83677B;
+}
+.five {
+    background-color: #ADADAD;
+}
+
+[data-tab-content] {
+    display: none;
+}
+
+.active[data-tab-content] {
+    display: block;
+}
