@@ -3900,7 +3900,7 @@ const updateBusTiming = () => {
 
     //Get Temporary access to proxy to avoid cors error when fetching here:
     //https://cors-anywhere.herokuapp.com/corsdemo
-    //Fetch Bus Arrival Data
+    // Fetch Bus Arrival Data
     // fetch(busArrivalUrl, {
     //     method: 'GET',
     //     headers: {
@@ -3954,6 +3954,7 @@ const updateBusTiming = () => {
         
         //Curent Time
         const currentTime = new Date()
+        console.log('currentTime',currentTime)
 
         //Creating Array of keys = [NextBus, NextBus1, NextBus2] 
         //for easy access of arrival timing when loop through to calculate arrival time for each bus
