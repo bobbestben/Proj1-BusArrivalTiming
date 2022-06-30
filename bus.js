@@ -2,7 +2,7 @@
 //This data neds to be continulously fetch when user searches for timing
 //Below is sample data for testing purpose
 //Bus arrival data for bus stop No. 01013
-const dataBusArrival = {
+const dataBusArrival_2 = {
     "odata.metadata": "http://datamall2.mytransport.sg/ltaodataservice/$metadata#BusArrivalv2/@Element",
     "BusStopCode": "01013",
     "Services": [
@@ -3816,37 +3816,6 @@ const dataBusStop = {
     ]
 }
 
-{ //API Portion - KIV
-
-//-------------------------------------------------------------------
-// Get temporary access to cors here first:
-// https://cors-anywhere.herokuapp.com/corsdemo
-
-
-// async function fetchDataAsync(url) {
-//     try {
-
-//         const response = await fetch(url, {
-//             method: 'GET',
-//             headers: {
-//               'AccountKey': 'c5SCu1KNQ4OsnpfU+wxoyg=='
-//             }
-//           });
-
-//         console.log(response)
-
-//         const data = await response.json()
-//         console.log(data)
-
-//     } catch(ex) {
-//         console.log(ex)
-//     }
-// }
-// // fetchDataAsync("https://api.opendota.com/api/teams")
-// // fetchDataAsync("http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=83139")
-// fetchDataAsync("https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=83139")
-//-------------------------------------------------------------------------------------------------------
-}
 //Building the Tabs in my homepage
 const tabs = document.querySelectorAll('[data-tab-target]')
 console.log('tabs',tabs)
@@ -3874,7 +3843,7 @@ tabs.forEach(tab => {
 
 //API Calls
 console.log('HELLO IS MY SCRIPT WORKING')
-console.log(dataBusArrival)
+console.log(dataBusArrival_2)
 console.log(dataBusStop)
 
 //Variables for updating bus-stop-section
@@ -3917,19 +3886,37 @@ const updateBusTiming = () => {
     busStopInfo_1.innerText = "Bus Stop Name"
     busStopInfo_2.innerText = "Bus Stop No. / Street Name"
 
-    let busArrivalUrl = "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg"+
+    let busArrivalUrl = "http://datamall2.mytransport.sg/"+
         "ltaodataservice/BusArrivalv2?BusStopCode="
 
-    //If search is empty, do nothing
     storeSearchValue = input.value
     if (input.value === "") {
         return
      }
     
-    //Update URL query parameter based on search input
+    //Update fetch URL query parameter based on search input
     busArrivalUrl += input.value
-    //Then fetch busArrivalData
-    //{ let busArrivalData = fetch code here... }
+    let dataBusArrival = null
+    //Get Temporary access to proxy to avoid cors error when fetching here:
+    //https://cors-anywhere.herokuapp.com/corsdemo
+
+    //Fetch Bus Arrival Data
+    fetch(busArrivalUrl, {
+        method: 'GET',
+        headers: {
+          'AccountKey': 'c5SCu1KNQ4OsnpfU+wxoyg=='
+        }
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(jsonData => {
+            dataBusArrival = jsonData
+            console.log(dataBusArrival)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 
     //Update Bus Stop Information - if input.value matches a bus stop
     const numberBusStops = dataBusStop['value'].length
@@ -3961,7 +3948,7 @@ const updateBusTiming = () => {
         //Bus Number - appent to parent row
         console.log('busNumber', dataBusArrival['Services'][j]['ServiceNo'])
         const busNumber = document.createElement('div')
-        busNumber.setAttribute('class','col-6')
+        busNumber.setAttribute('class','col')
         busNumber.innerText = dataBusArrival['Services'][j]['ServiceNo']
         busArrivalSection.append(busNumber)
         
