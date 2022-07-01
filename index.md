@@ -1,63 +1,10 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/bobbestben/123/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bobbestben/123/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
 
 
 
-Use AJAX to make a request to an external data source like OMDBapi and insert some of the data retrieved into the DOM
-Implement responsive design (i.e. it should be fully functional on desktop, tablet, mobile, etc)
-Have one or more complex user interface modules such as a carousel, drag and drop, a sticky nav, tooltips, etc
-
-Your application or game must meet these requirements:
-Built with HTML, CSS and JavaScript (jQuery is strongly optional)
-Use Javascript for DOM manipulation
-Hosted on Github pages
-Commits to Github frequently
 A README.md file with explanations of the technologies used, the approach taken, a link to your live site, installation instructions, unsolved problems, etc.
 
 
-Search and filter functionality (e.g. flight or hotel booking websites)
 
-
-Be approximately 5 minutes in length
-Show off all features of the app
-Explain the technical details
-Explain the technical challenges
-Explain which improvements you might make
 
 # BMWsg - Bus Arrival Timing App
 
@@ -65,7 +12,9 @@ This is my attempt at making your life better if you own a BMW (Bus, MRT, Walk) 
 
 This app fetches the bus arrival timings of all the buses at a bus stop.
 
-Search a bus stop to try it out!
+Try it out, search a bus stop number at https://bobbestben.github.io/
+
+No installation required, this appliation uses the source HTML, CSS and JS files only.
 
 ## Features of the app
 
@@ -75,18 +24,20 @@ Search a bus stop to try it out!
 
 Pages *within* a page, hover and *current page selection* effects
 
-Main idea is assigning a unique **class** to the currently selected page. 
+Main idea is assigning a unique `class` to the currently selected page.
 
-Here I'm using data attribute to assign which content sections(data-tab-content) belong to which page (data-tab-target).
-
-```markdown
+```HTML
 ### HTML
 <div class="active" data-tab-target=".home-page">Search</div>
 <div data-tab-target=".map-page">Map</div>
 
 <section class="home-page active" data-tab-content>
 <section class="map-page p-2 text-center" data-tab-content>
+```
 
+Here I'm using data attribute to assign which content sections (`data-tab-content`) belong to which page (`data-tab-target`). 
+
+```JS
 ### CSS
 [data-tab-content] { 
     display: none; 
@@ -95,8 +46,11 @@ Here I'm using data attribute to assign which content sections(data-tab-content)
 .active[data-tab-content] {
     display: block;
 }
+```
+Adding a `class` to selected page ``onclick``
 
-### JavaScript
+```js
+### Javascript
 tab.onclick = function() { ...
 
     target.classList.add('active')
@@ -109,11 +63,11 @@ tab.onclick = function() { ...
 
 Currently can only search for bus stop number.
 
-CORS Proxy is required if not will encounter CORS errors. Currently using *cors-anywhere* proxy but need to request access [here](https://cors-anywhere.herokuapp.com/corsdemo) each time you start the app.
+Error handling - throws error message if incorrect bus stop number is searched.
 
-Searching for bus number not yet as requires modification of the data structure and algorithm.
+CORS Proxy is required - currently using *cors-anywhere* proxy, need to request access [here](https://cors-anywhere.herokuapp.com/corsdemo) each time app is initialized
 
-```markdown
+```js
 ### Updating query parameter based on search input
 let busArrivalUrl = "https://cors-anywhere.herokuapp.com/
                         http://datamall2.mytransport.sg/
@@ -134,44 +88,47 @@ fetch(busArrivalUrl, {
 
 ```
 
+Searching for bus number not yet as requires modififying the data structure of the API data.
+
+
 ### Bus Stop Info Section 
 
-Update bus timings and bus stop information using the API data.
+Update `bus-stop-info` and `bus-arrival-timings` using the API data.
 
-Data structure /object manipulation - <show example here or below in the code alrogithm there>
+Everything is formatted mainly using **Bootstrap's flexbox** and **grid system**. Icons also from bootstrap.
 
-Everything is formatted mainly using Bootstrap flexbox and grid system. Icons also from bootstrap.
-
-```markdown
-### Sample *div* that will be appended from JS after searching bus stop
+```html
+### Sample div that will be appended from JS after searching bus stop
 <div class="row flex-nowrap bus-arrival-section">
     <div class="col-6">Bus No. 1</div>
     <div class="col">|3min|</div>
     <div class="col">|15min|</div>
     <div class="col">|20min|</div>
 </div>
-
+```
+```js
 ### Algorithm - Nested Loop in JS
 const updateBusTiming = () => {
 
     //First Loop - for each bus at bus stop
     ///Second Loop - for each arrival timing for each bus
+    const futureTime = new Date(dataBusArrival['Services'][j][nextBusKeys[k]]['EstimatedArrival'])
 
 }
 
 ### Time and Date in JS
-const busArrivalTiming = "2022-06-30T12:11:16+08:00"
+const busArrivalTiming = "2022-06-30T12:11:16+08:00" //Common time format from API
 
-`const currentTime = new Date() // "Fri Jul 01 2022 04:59:34 GMT+0800 (Singapore Standard Time)"`
+const currentTime = new Date() // "Fri Jul 01 2022 04:59:34 GMT+0800 (Singapore Standard Time)"`
 
-`const futureTime = new Date(busArrivalTiming)`
+const futureTime = new Date(busArrivalTiming)
 
-`const minsToArrival = Math.floor((futureTime - currentTime) / (1000*60))`
+const minsToArrival = Math.floor((futureTime - currentTime) / (1000*60))
 ```
 
 ### Refresh Button
-Same as my search function, just that i need to store the previous search value
-```markdown
+Re-used same function as my `searchBtn`, just need to store the search value
+```js
 searchBtn.onclick = function() {
     updateBusTiming()
 }
@@ -183,21 +140,33 @@ refreshBtn.onclick = function() {
 ```
 
 ### Tooltip
+To be continued.
 
-### Not really sticky Nav, but Scrollable Div
-can use either sticky nav or scrolable div
-use scrollable div, bootstrap - overflow
-scrollable div i can control my footer, too always be within page
-here i use calc(vh-250px)
+
+### Scrollable div - pseudo sticky nav
+
+I made the container scrollable within the page using:
+- Bootstrap's `overflow-auto` to contain the content
+- within viewport height of `calc(100vh - 240px)`
+
+![Image](./img/overflow-div.PNG)
+
+Sticky nav works. But if I do so, I would need to make `search-bar` and `bus-stop-info` sticky as well. This *might* affect other pages if I don't want those content to be sticky.
 
 ### Future Improvements
-Bus Stop timings - i wanna make it live, like the otter in TraceTogether
 
-I wanna put MRT map here, can zoom in/out
+1. Bus Stop timings - Make it live feed, like the otter in TraceTogether
 
-On Search page, i wanna allocate 50% of height to put a real-time map.
-My location, Bus stop locations 
+    ![Image](./img/live-data.PNG)
 
-Fav tab - explore local cache/storing/saving
+
+2. Search Page - I want to put a real time map of
+   - User Location
+   - Bus Stop locations
+   - Interactive map - provides info when icons are clicked
+
+3. Favourites page - explore local cache/storing/saving of favourite bus stops
+
+    ![Image](./img/search-map-design.PNG)
 
 
