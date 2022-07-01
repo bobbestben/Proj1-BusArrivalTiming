@@ -140,8 +140,13 @@ refreshBtn.onclick = function() {
 ```
 
 ### Tooltip
-To be continued.
 
+Designed using CSS:
+- Design 2 shapes - a Tooltip box, and Triangle
+- Position it to the left `left: 2.5rem` and `transform: translateX() translate Y()`
+- set `scale: 0`
+- on `:hover`, set `scale: 1`
+- play with animation - `transition` and `transform-origin`
 
 ### Scrollable div - pseudo sticky nav
 
@@ -155,7 +160,7 @@ Sticky nav works. But if I do so, I would need to make `search-bar` and `bus-sto
 
 ### Future Improvements
 
-1. Bus Stop timings - Make it live feed, like the otter in TraceTogether
+1. Bus Stop timings - Make it live feed, like the otter in TraceTogether, so user don't need to click refresh
 
     ![Image](./img/live-data.PNG)
 
@@ -164,9 +169,10 @@ Sticky nav works. But if I do so, I would need to make `search-bar` and `bus-sto
    - User Location
    - Bus Stop locations
    - Interactive map - provides info when icons are clicked
+  
+    ![Image](./img/search-map-design.PNG)
 
 3. Favourites page - explore local cache/storing/saving of favourite bus stops
 
-    ![Image](./img/search-map-design.PNG)
 
 

@@ -3816,7 +3816,15 @@ const dataBusStop = {
     ]
 }
 
-//Building the Tabs in my homepage
+//API Calls
+console.log('HELLO IS MY SCRIPT WORKING')
+console.log(dataBusArrival)
+console.log(dataBusStop)
+
+//---------------------------------Actual Code Starts Here-------------------------------------------------
+
+
+//Building the Tabs and current selection effect
 const tabs = document.querySelectorAll('[data-tab-target]')
 console.log('tabs',tabs)
 
@@ -3839,23 +3847,16 @@ tabs.forEach(tab => {
     }
 })
 
-
-
-//API Calls
-console.log('HELLO IS MY SCRIPT WORKING')
-console.log(dataBusArrival)
-console.log(dataBusStop)
-
 //Variables for updating bus-stop-section
 const busStopSection = document.querySelector('.bus-stop-section')
 const busStopInfo_1 = document.querySelector('.bus-stop-info h5')
 const busStopInfo_2 = document.querySelector('.bus-stop-info p')
 const busStopError = document.querySelector('.bus-stop-section .error-no-bus-stop-found')
-let storeSearchValue = null 
-
+ 
 const searchBtn = document.querySelector('.search-bar button')
 const refreshBtn = document.querySelector('.refresh-button svg')
 const input = document.querySelector('.search-bar input')
+let storeSearchValue = null
 
 //Search Button - on click
 searchBtn.onclick = function() {
@@ -3865,8 +3866,8 @@ searchBtn.onclick = function() {
 
 //Refresh Button - on click
 refreshBtn.onclick = function() {
-    input.value = storeSearchValue
     console.log('refresh-btn clicked')
+    input.value = storeSearchValue
     updateBusTiming()
     input.value = ""
 }
@@ -3879,9 +3880,9 @@ const updateBusTiming = () => {
 
     //Clear previous bus timings if have from previous search
     const busArrivalSection = document.querySelectorAll('.bus-stop-section .bus-arrival-section')
-    if (busArrivalSection) { busArrivalSection.forEach( element => {
-        element.remove()
-    }) }
+    if (busArrivalSection) { 
+        busArrivalSection.forEach( element => { element.remove() } ) 
+    }
 
     busStopInfo_1.innerText = "Bus Stop Name"
     busStopInfo_2.innerText = "Bus Stop No. / Street Name"
@@ -3945,7 +3946,7 @@ const updateBusTiming = () => {
         const busArrivalSection = document.createElement('div')
         busArrivalSection.setAttribute('class','row flex-nowrap py-2 bus-arrival-section')
         
-        //Bus Number - appent to parent row
+        //Bus Number - append to parent row
         console.log('busNumber', dataBusArrival['Services'][j]['ServiceNo'])
         const busNumber = document.createElement('div')
         busNumber.setAttribute('class','col-6')
@@ -4005,3 +4006,4 @@ const updateBusTiming = () => {
     //Clear the search value
     input.value = ""
 }
+
