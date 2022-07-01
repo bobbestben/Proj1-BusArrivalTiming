@@ -138,6 +138,8 @@ fetch(busArrivalUrl, {
 
 Update bus timings and bus stop information using the API data.
 
+Data structure /object manipulation - <show example here or below in the code alrogithm there>
+
 Everything is formatted mainly using Bootstrap flexbox and grid system. Icons also from bootstrap.
 
 ```markdown
@@ -149,26 +151,44 @@ Everything is formatted mainly using Bootstrap flexbox and grid system. Icons al
     <div class="col">|20min|</div>
 </div>
 
-### Nested Loop in JS
-//First Loop - for each bus at bus stop
-///Second Loop - for each arrival timing for each bus
+### Algorithm - Nested Loop in JS
+const updateBusTiming = () => {
+
+    //First Loop - for each bus at bus stop
+    ///Second Loop - for each arrival timing for each bus
+
+}
 
 ### Time and Date in JS
 const busArrivalTiming = "2022-06-30T12:11:16+08:00"
 
-const currentTime = new Date() // "Fri Jul 01 2022 04:59:34 GMT+0800 (Singapore Standard Time)"
+`const currentTime = new Date() // "Fri Jul 01 2022 04:59:34 GMT+0800 (Singapore Standard Time)"`
 
-const futureTime = new Date(busArrivalTiming)
+`const futureTime = new Date(busArrivalTiming)`
 
-const minsToArrival = Math.floor((futureTime - currentTime) / (1000*60))
+`const minsToArrival = Math.floor((futureTime - currentTime) / (1000*60))`
 ```
 
 ### Refresh Button
 Same as my search function, just that i need to store the previous search value
+```markdown
+searchBtn.onclick = function() {
+    updateBusTiming()
+}
+
+refreshBtn.onclick = function() {
+    input.value = storeSearchValue
+    updateBusTiming()
+}
+```
 
 ### Tooltip
 
 ### Not really sticky Nav, but Scrollable Div
+can use either sticky nav or scrolable div
+use scrollable div, bootstrap - overflow
+scrollable div i can control my footer, too always be within page
+here i use calc(vh-250px)
 
 ### Future Improvements
 Bus Stop timings - i wanna make it live, like the otter in TraceTogether
